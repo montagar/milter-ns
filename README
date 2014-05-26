@@ -1,6 +1,20 @@
 milter-ns - A sendmail milter to block domains based on domain nameserver
 Copyright (c) 2014, Montagar Software, Inc.
 
+As I've been getting more SPAM lately, I was trying to figure out a way to
+stop more of it.  Looking at the domains, they were all using "Privacy Protection"
+and often registered via Moniker.  Then Moniker seemed to get tired of them and they 
+moved to ENOM as a Registrar.  Often the domains where registered the same day of 
+the spam.
+
+The common item was they were always using ENOM as the Name Server for the
+domain.  So if the only mail I'm getting from ENOM registered domain is SPAM,
+I can just write a milter to get the HELO/EHLO and MAILFROM information, check 
+the Name Server for that domain, and fail the transaction if it's using their
+name servers.
+
+It seems pretty effective, as SPAM that gets by the RBL's has dropped considerably.
+
 Licensing
 ----------
 
@@ -8,6 +22,8 @@ See COPYING  for license information.
 
 Prerequisites
 --------------
+
+	sendmail
 
 Installation
 ------------
