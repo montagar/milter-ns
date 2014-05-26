@@ -1,0 +1,30 @@
+milter-ns - A sendmail milter to block domains based on domain nameserver
+Copyright (c) 2014, Montagar Software, Inc.
+
+Licensing
+----------
+
+See COPYING  for license information.
+
+Prerequisites
+--------------
+
+Installation
+------------
+
+	./configure --prefix=/usr
+
+	Add a similar line to /etc/mail/sendmail.mc:
+	INPUT_MAIL_FILTER(`mymilter', `S=unix:/var/run/milter-ns.sock, T=S:30s;R:30s;E:5m')
+
+	Rebuild sendmail.cf, and restart:
+	make
+	systemctl restart sendmail
+
+	Add the folling file to /etc/init:
+
+	milter-ns.conf
+
+	This file will insure the milter is started before sendmail is started
+
+	
