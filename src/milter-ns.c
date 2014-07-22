@@ -39,6 +39,8 @@ char	*name_servers[] = {
 		".name-services.com",		// ENOM domains are banned
 		".registrar-servers.com",	// ENOM domains are banned
 		".bigrock.com",			// New registrar with problems
+		"DANA.NS.CLOUDFLARE.COM",	// Having a little trouble with some new cloudflare DNS's domains
+		"ROB.NS.CLOUDFLARE.COM",
 		NULL
 	} ;
 
@@ -110,6 +112,7 @@ sfsistat mlfi_helo(SMFICTX *ctx, char *helohost)
 	// connection.
 	strncpy(mp->helo, helohost, sizeof(mp->helo)-1) ;
 	if(strcmp(mp->helo, "ylmf-pc") == 0) {
+		syslog(LOG_INFO, "Reject ylmf-pc: Host=%s", mp->host) ;
 		status = SMFIS_REJECT ;
 	}
 	return(status) ;
