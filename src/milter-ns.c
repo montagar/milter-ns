@@ -41,6 +41,7 @@ char	*name_servers[] = {
 		".bigrock.com",			// New registrar with problems
 		"DANA.NS.CLOUDFLARE.COM",	// Having a little trouble with some new cloudflare DNS's domains
 		"ROB.NS.CLOUDFLARE.COM",
+		"FRED.NS.CLOUDFLARE.COM",
 		NULL
 	} ;
 
@@ -110,11 +111,14 @@ sfsistat mlfi_helo(SMFICTX *ctx, char *helohost)
 	// been seen in a lot of places trying to brute-force accounts on
 	// SMTP servers.  If found, we force reject on the reset of the 
 	// connection.
+	//
+	// Moved this test into it's own milter...
+	//
 	strncpy(mp->helo, helohost, sizeof(mp->helo)-1) ;
-	if(strcmp(mp->helo, "ylmf-pc") == 0) {
-		syslog(LOG_INFO, "Reject ylmf-pc: Host=%s", mp->host) ;
-		status = SMFIS_REJECT ;
-	}
+//	if(strcmp(mp->helo, "ylmf-pc") == 0) {
+//		syslog(LOG_INFO, "Reject ylmf-pc: Host=%s", mp->host) ;
+//		status = SMFIS_REJECT ;
+//	}
 	return(status) ;
 }
 
